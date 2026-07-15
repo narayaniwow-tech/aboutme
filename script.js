@@ -21,6 +21,12 @@
   }, { rootMargin: '0px 0px -10% 0px', threshold: 0.12 });
   revealEls.forEach(el => io.observe(el));
 
+  // safety net: if anything is still hidden after 3s, reveal it
+  setTimeout(() => {
+    document.querySelectorAll('.reveal:not(.visible), .reveal-up:not(.visible)')
+      .forEach(el => el.classList.add('visible'));
+  }, 3000);
+
   // subtle parallax on real visuals (video + image only)
   const visuals = document.querySelectorAll('.case-visual:not(.case-visual-graphic):not(.case-visual-quote):not(.case-visual-list)');
   if (visuals.length) {
